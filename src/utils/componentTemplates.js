@@ -1,12 +1,12 @@
 /**
  * 组件模板工具模块
- * 
+ *
  * 功能说明：
  * 1. 为拖拽编辑器提供各种组件的HTML模板
  * 2. 支持动态生成表格、列表等复杂组件
  * 3. 提供统一的模板获取接口
  * 4. 支持自定义组件样式和结构
- * 
+ *
  * 使用方法：
  * import { getComponentTemplate } from '@/utils/componentTemplates.js'
  * const template = getComponentTemplate('heading')
@@ -20,19 +20,34 @@ const componentTemplates = {
   /**
    * 标题组件模板
    * 生成一个h2标题，可编辑
-   * 
+   *
    * @returns {string} HTML模板字符串
    */
-  heading: () => `
-    <h2 style="margin: 16px 0; font-size: 24px; font-weight: bold; color: #2c3e50;">
-      Your Heading Here
-    </h2>
-  `,
+  // heading: () => `
+  //   <h2 style="margin: 16px 0; font-size: 24px; font-weight: bold; color: #2c3e50;">
+  //     Your Heading Here
+  //   </h2>
+  // `,
+  //json
+  heading: () => {
+    return {
+      type: "heading",
+      attrs: {
+        level: 2,
+      },
+      content: [
+        {
+          type: "text",
+          text: "我是标题2",
+        },
+      ],
+    };
+  },
 
   /**
    * 段落组件模板
    * 生成一个标准段落文本
-   * 
+   *
    * @returns {string} HTML模板字符串
    */
   paragraph: () => `
@@ -45,7 +60,7 @@ const componentTemplates = {
   /**
    * 图片组件模板
    * 生成一个带占位符的图片元素
-   * 
+   *
    * @returns {string} HTML模板字符串
    */
   image: () => `
@@ -70,7 +85,7 @@ const componentTemplates = {
    * 表格组件模板
    * 生成一个3行3列的标准表格
    * 包含表头和示例数据
-   * 
+   *
    * @returns {string} HTML模板字符串
    */
   table: () => `
@@ -154,7 +169,7 @@ const componentTemplates = {
   /**
    * 无序列表组件模板
    * 生成一个带项目符号的列表
-   * 
+   *
    * @returns {string} HTML模板字符串
    */
   bulletList: () => `
@@ -189,8 +204,8 @@ const componentTemplates = {
 
   /**
    * 引用块组件模板
-     * 生成一个带样式的引用块
-   * 
+   * 生成一个带样式的引用块
+   *
    * @returns {string} HTML模板字符串
    */
   blockquote: () => `
@@ -222,7 +237,7 @@ const componentTemplates = {
   /**
    * 分隔符组件模板
    * 生成一个水平分隔线
-   * 
+   *
    * @returns {string} HTML模板字符串
    */
   divider: () => `
@@ -233,20 +248,20 @@ const componentTemplates = {
       background: linear-gradient(to right, #3498db, #2c3e50, #3498db);
       border-radius: 1px;
     " />
-  `
-}
+  `,
+};
 
 /**
  * 获取指定类型的组件模板
- * 
+ *
  * @param {string} type - 组件类型标识符
  * @returns {string} 对应的HTML模板字符串
  * @throws {Error} 当组件类型不存在时抛出错误
- * 
+ *
  * @example
  * // 获取标题组件模板
  * const headingTemplate = getComponentTemplate('heading')
- * 
+ *
  * // 获取表格组件模板
  * const tableTemplate = getComponentTemplate('table')
  */
@@ -254,7 +269,7 @@ export function getComponentTemplate(type) {
   // 检查组件类型是否存在
   if (!componentTemplates[type]) {
     // 如果类型不存在，返回错误提示或默认模板
-    console.warn(`Component type "${type}" not found, using default template`)
+    console.warn(`Component type "${type}" not found, using default template`);
     return `
       <div style="
         padding: 16px;
@@ -266,43 +281,43 @@ export function getComponentTemplate(type) {
       ">
         <strong>Warning:</strong> Unknown component type "${type}"
       </div>
-    `
+    `;
   }
-  
+
   // 返回对应的组件模板
-  return componentTemplates[type]()
+  return componentTemplates[type]();
 }
 
 /**
  * 获取所有可用的组件类型
- * 
+ *
  * @returns {Array<Object>} 组件类型数组，每个对象包含type、name和icon属性
- * 
+ *
  * @example
  * const availableComponents = getAvailableComponents()
  * // 返回: [{ type: 'heading', name: 'Heading', icon: 'H' }, ...]
  */
 export function getAvailableComponents() {
   return [
-    { type: 'heading', name: 'Heading', icon: 'H' },
-    { type: 'paragraph', name: 'Paragraph', icon: 'P' },
-    { type: 'image', name: 'Image', icon: 'IMG' },
-    { type: 'table', name: 'Table', icon: 'TAB' },
-    { type: 'bulletList', name: 'Bullet List', icon: 'UL' },
-    { type: 'blockquote', name: 'Quote', icon: 'Q' },
-    { type: 'divider', name: 'Divider', icon: 'DIV' },
-  ]
+    { type: "heading", name: "Heading", icon: "H" },
+    { type: "paragraph", name: "Paragraph", icon: "P" },
+    { type: "image", name: "Image", icon: "IMG" },
+    { type: "table", name: "Table", icon: "TAB" },
+    { type: "bulletList", name: "Bullet List", icon: "UL" },
+    { type: "blockquote", name: "Quote", icon: "Q" },
+    { type: "divider", name: "Divider", icon: "DIV" },
+  ];
 }
 
 /**
  * 注册新的组件模板
  * 允许动态添加新的组件类型
- * 
+ *
  * @param {string} type - 组件类型标识符
  * @param {string} name - 组件显示名称
  * @param {string} icon - 组件图标标识符
  * @param {Function} templateFn - 返回HTML模板的函数
- * 
+ *
  * @example
  * // 注册一个新的代码块组件
  * registerComponent('codeBlock', 'Code Block', 'CODE', () => `
@@ -311,15 +326,15 @@ export function getAvailableComponents() {
  */
 export function registerComponent(type, name, icon, templateFn) {
   if (componentTemplates[type]) {
-    console.warn(`Component type "${type}" already exists, overwriting...`)
+    console.warn(`Component type "${type}" already exists, overwriting...`);
   }
-  
+
   // 添加新的组件模板
-  componentTemplates[type] = templateFn
-  
+  componentTemplates[type] = templateFn;
+
   // 返回注册结果
   return {
     success: true,
-    message: `Component "${name}" registered successfully`
-  }
+    message: `Component "${name}" registered successfully`,
+  };
 }

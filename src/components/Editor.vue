@@ -152,6 +152,8 @@ export default {
      * @param {DragEvent} event - 拖拽事件对象
      */
     const handleDrop = (event) => {
+      // debugger
+      console.log("drop....");
       event.preventDefault();
 
       // 安全处理：确保dataTransfer和编辑器实例存在
