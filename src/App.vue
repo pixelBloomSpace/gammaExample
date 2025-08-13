@@ -1,11 +1,5 @@
 <template>
   <div id="app">
-    <!-- 页面标题 -->
-    <header class="app-header">
-      <h1>Drag & Drop Editor</h1>
-      <p class="subtitle">Build beautiful content with ease</p>
-    </header>
-
     <!-- 主应用区域 -->
     <div class="app-container">
       <!-- 侧边栏：包含可拖拽组件 -->

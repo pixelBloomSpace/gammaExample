@@ -1,5 +1,9 @@
 <template>
-  <div class="editor-wrapper">
+  <div class="editor-wrapper" v-if="editor">
+    <drag-handle :editor="editor" :tippy-options="{ placement: 'left' }" pluginKey="myCustomDragHandle">
+      <div class="custom-drag-handle"></div>
+    </drag-handle>
+
     <!-- 编辑器工具栏：提供基础文本格式化功能 -->
     <div class="editor-toolbar">
       <!-- 加粗按钮：使用Tiptap的toggleBold命令 -->
@@ -52,6 +56,8 @@
 
 <script>
 import { onMounted, onBeforeUnmount, ref } from "vue";
+import { DragHandle } from "@tiptap/extension-drag-handle-vue-3";
+import NodeRange from "@tiptap/extension-node-range";
 import { EditorContent, useEditor } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import Dropcursor from "@tiptap/extension-dropcursor";
@@ -72,6 +78,7 @@ export default {
   name: "Editor",
   components: {
     EditorContent,
+    DragHandle,
   },
   emits: ["drop"],
   setup(props, { emit, expose }) {
@@ -90,13 +97,16 @@ export default {
     const editor = useEditor({
       extensions: [
         StarterKit,
-        Dropcursor,
+        // Dropcursor,
         Image.configure({
           inline: true, // 允许行内图片
           allowBase64: true, // 允许Base64图片
         }),
         Placeholder.configure({
           placeholder: "Start writing or drag components from the sidebar...", // 空编辑器提示文字
+        }),
+        NodeRange.configure({
+          key: null,
         }),
       ],
 
@@ -114,25 +124,25 @@ export default {
        * @param {DragEvent} event - 拖拽事件对象
        * @returns {boolean} - 是否处理了该事件
        */
-      onDrop: (view, event) => {
-        // 安全处理：确保dataTransfer存在
-        if (!event.dataTransfer) return false;
+      // onDrop: (view, event) => {
+      //   // 安全处理：确保dataTransfer存在
+      //   if (!event.dataTransfer) return false;
 
-        // 获取拖拽的组件类型
-        const componentType = event.dataTransfer.getData("component-type");
-        if (componentType) {
-          event.preventDefault();
+      //   // 获取拖拽的组件类型
+      //   const componentType = event.dataTransfer.getData("component-type");
+      //   if (componentType) {
+      //     event.preventDefault();
 
-          // 计算拖拽位置在编辑器中的坐标
-          const pos = view.posAtCoords({ left: event.clientX, top: event.clientY });
-          if (pos) {
-            // 在指定位置插入组件
-            insertComponent(componentType, pos.pos);
-          }
-          return true;
-        }
-        return false;
-      },
+      //     // 计算拖拽位置在编辑器中的坐标
+      //     const pos = view.posAtCoords({ left: event.clientX, top: event.clientY });
+      //     if (pos) {
+      //       // 在指定位置插入组件
+      //       insertComponent(componentType, pos.pos);
+      //     }
+      //     return true;
+      //   }
+      //   return false;
+      // },
     });
 
     /**
@@ -213,7 +223,27 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.custom-drag-handle {
+  &::after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1.25rem;
+    content: "⠿";
+    font-weight: 700;
+    cursor: grab;
+    background: #0d0d0d10;
+    color: #0d0d0d50;
+    border-radius: 0.25rem;
+  }
+}
+
+.ProseMirror {
+  padding: 1rem;
+}
+
 /* 编辑器样式 */
 button {
   margin-right: 8px;
