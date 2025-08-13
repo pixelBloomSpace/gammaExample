@@ -1,5 +1,6 @@
 <template>
   <div class="editor-wrapper" v-if="editor">
+    <!-- 编辑器内元素拖拽排序的手柄 -->
     <drag-handle :editor="editor" :tippy-options="{ placement: 'left' }" pluginKey="myCustomDragHandle">
       <div class="custom-drag-handle"></div>
     </drag-handle>
