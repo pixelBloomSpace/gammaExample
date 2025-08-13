@@ -1,6 +1,7 @@
 # Tiptap Drag & Drop Editor
 
 一个类似 Gamma.app 的拖拽式富文本编辑器，基于 Vue 3.4、Tiptap 2.11.7 和 Vite 构建。
+方便快速理解 gamma 无限画布基础实现原理。
 
 ## 功能特性
 
