@@ -94,7 +94,6 @@ myComponent: {
 - **Vue 3.4** - 渐进式 JavaScript 框架
 - **Tiptap 2.11.7** - 现代富文本编辑器框架
 - **Vite** - 下一代前端构建工具
-- **SortableJS** - 拖拽排序库
 
 ## 开发说明
 
