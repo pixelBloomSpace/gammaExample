@@ -15,11 +15,7 @@
 - **Heading** - 标题组件
 - **Paragraph** - 段落组件
 - **Image** - 图片组件
-- **Table** - 表格组件
-- **Bullet List** - 无序列表
-- **Numbered List** - 有序列表
 - **Quote** - 引用块
-- **Code Block** - 代码块
 - **Callout** - 提示框
 - **Divider** - 分隔线
 
@@ -59,8 +55,6 @@ src/
 ├── components/
 │   ├── Editor.vue          # 主编辑器组件
 │   └── Sidebar.vue         # 侧边栏组件
-├── composables/
-│   └── useDragDrop.js      # 拖拽功能组合式函数
 ├── utils/
 │   └── componentTemplates.js # 组件模板定义
 ├── App.vue                 # 主应用组件
