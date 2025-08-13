@@ -1,0 +1,26 @@
+{
+  "name": "tiptap-drag-drop-editor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.0",
+    "@tiptap/vue-3": "^2.11.5",
+    "@tiptap/starter-kit": "^2.11.7",
+    "@tiptap/extension-dropcursor": "^2.11.7",
+    "@tiptap/extension-image": "^2.11.7",
+    "@tiptap/extension-table": "^2.11.7",
+    "@tiptap/extension-placeholder": "^2.11.7",
+    "sortablejs": "^1.15.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^5.0.0",
+    "@types/sortablejs": "^1.15.8"
+  }
+}
