@@ -6,6 +6,7 @@
     <!-- 组件列表容器 -->
     <div class="components-list">
       <!-- 遍历所有可用组件，为每个组件创建可拖拽元素 -->
+      <!-- draggable="true 让元素可拖拽 -->
       <div 
         v-for="component in components" 
         :key="component.type"
